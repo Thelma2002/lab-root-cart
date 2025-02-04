@@ -48,8 +48,33 @@ totalElement.innerText = total.toFixed(2);
 function removeProduct(event) {
   const target = event.currentTarget;
   console.log('The target in remove is:', target);
-  //... your code goes here
+
+  // Get the product row element that contains the button
+  const productRow = target.parentNode.parentNode;
+
+  // Remove the product row from the DOM
+  productRow.parentNode.removeChild(productRow);
+
+  // Update the total price after removing the product
+  calculateAll();
 }
+
+// Function to run when the document is ready
+window.addEventListener('DOMContentLoaded', () => {
+  // Query all "Remove" buttons
+  const removeButtons = document.querySelectorAll('.btn-remove');
+
+  // Loop through all "Remove" buttons and add click event listeners
+  removeButtons.forEach(button => {
+    button.addEventListener('click', removeProduct);
+  });
+
+  // Add event listener to the calculate prices button (if it's already in your code)
+  const calculatePricesBtn = document.getElementById('calculate');
+  if (calculatePricesBtn) {
+    calculatePricesBtn.addEventListener('click', calculateAll);
+  }
+});
 
 // ITERATION 5
 
